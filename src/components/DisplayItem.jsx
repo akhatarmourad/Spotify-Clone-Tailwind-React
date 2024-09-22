@@ -33,7 +33,7 @@ export default function DisplayItem() {
         <hr className="border-gray-800 w-full mt-3 mb-1" />
 
         <div>
-            <div className="text-sm flex items-center justify-between text-gray-500">
+            <div className="text-sm flex items-center justify-between text-gray-400">
                 <p># Title</p>
                 <p>Album</p>
                 <p>Release Date</p>
@@ -48,11 +48,11 @@ export default function DisplayItem() {
                             <div className="flex gap-2 items-center">
                                 <p>{index + 1}</p>
                                 <img src={song.image} alt={song.image} className="w-10 rounded-lg" />
-                                <p className="text-sm">{song.name}</p>
+                                <p className="text-sm font-light text-gray-300">{song.name}</p>
                             </div>
-                            <p>{albumData.name}</p>
-                            <p>5 Days ago</p>
-                            <p>3:00</p>
+                            <p className="text-sm font-light text-gray-300">{albumData.name}</p>
+                            <p className="text-sm font-light text-gray-300">5 Days ago</p>
+                            <p className="text-sm font-light text-gray-300">3:00</p>
                         </div>
                     ))
                 }
