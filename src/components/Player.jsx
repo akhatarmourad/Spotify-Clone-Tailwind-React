@@ -1,7 +1,11 @@
-
+import { useContext } from "react";
 import { assets, songsData } from "../assets/assets";
+import { PlayerContext } from "../context/PlayerContext";
 
 export default function Player() {
+
+    const { audioBar, audioBg } = useContext(PlayerContext);
+
   return (
     <div className="h-full w-full flex justify-between items-center px-3 text-gray-300">
         <div className="hidden lg:flex items-center gap-3">
@@ -25,8 +29,8 @@ export default function Player() {
 
             <div className="flex items-center gap-5">
                 <p className="text-sm font-light">0:00</p>
-                <div className="w-[55vw] max-w-[400px] rounded-full bg-gray-300 cursor-pointer">
-                    <hr className="h-1 bg-gradient-to-r from-green-700 to-green-400 w-10 rounded-full border-none" />
+                <div ref={audioBg} className="w-[55vw] max-w-[400px] rounded-full bg-gray-300 cursor-pointer">
+                    <hr ref={audioBar} className="h-1 bg-gradient-to-r from-green-700 to-green-400 w-10 rounded-full border-none" />
                 </div>
                 <p className="text-sm font-light">3:00</p>
             </div>
