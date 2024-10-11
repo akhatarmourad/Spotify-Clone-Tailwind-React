@@ -6,7 +6,7 @@ import { PlayerContext } from "../context/PlayerContext";
 
 export default function Home() {
 
-  const audioRef = useContext(PlayerContext);
+  const { audioRef, track } = useContext(PlayerContext);
 
   return (
     <div className="w-full h-full">
@@ -17,7 +17,7 @@ export default function Home() {
         <div className="h-[10%] w-full">
           <Player />
         </div>
-        <audio ref={audioRef} preload="auto"></audio>
+        <audio ref={audioRef} src={track.file} preload="auto"></audio>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import { createContext, useRef, useState } from 'react';
+import { createContext, useEffect, useRef, useState } from 'react';
 import { songsData } from '../assets/assets';
 
 export const PlayerContext = createContext();
@@ -16,7 +16,35 @@ const PlayerContextProvider = ({ children }) => {
         total: {seconds: 0, minutes: 0}
     });
 
-    const contextValue = { audioRef, audioBar, audioBg, track, setTrack, playStatus, setPlayStatus, time, setTime };
+    const play = () => {
+        audioRef.current.play();
+        setPlayStatus(true);
+    }
+
+    const pause = () => {
+        audioRef.current.pause();
+        setPlayStatus(false);
+    }
+
+    useEffect(() => {
+        setTimeout(() => {
+            audioRef.current.ontimeupdate = () => {
+                setTime({
+                    current: {
+                        minutes: Math.floor(audioRef.current.currentTime / 60),
+                        seconds: Math.floor(audioRef.current.currentTime % 60)
+                    },
+                    total: {
+                        minutes: Math.floor(audioRef.current.duration / 60),
+                        seconds: Math.floor(audioRef.current.duration % 60)
+                    }
+                })
+            }
+        }, 1000);
+
+    }, [audioRef]);
+
+    const contextValue = { audioRef, audioBar, audioBg, track, setTrack, playStatus, setPlayStatus, time, setTime, play, pause };
 
     return (
         <PlayerContext.Provider value={contextValue}>

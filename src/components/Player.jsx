@@ -4,17 +4,17 @@ import { PlayerContext } from "../context/PlayerContext";
 
 export default function Player() {
 
-    const { audioBar, audioBg } = useContext(PlayerContext);
+    const { audioBar, audioBg, play, pause, playStatus, track, time } = useContext(PlayerContext);
 
   return (
     <div className="h-full w-full flex justify-between items-center px-3 text-gray-300">
         <div className="hidden lg:flex items-center gap-3">
             <div>
-                <img src={songsData[0].image} alt="Song Thumbnail" className="w-12 rounded-lg" />
+                <img src={track.image} alt="Song Thumbnail" className="w-12 rounded-lg" />
             </div>
             <div>
-                <p>{songsData[0].name}</p>
-                <p className="text-sm text-gray-500">{songsData[0].desc.slice(0, 25) + "..."}</p>
+                <p>{track.name}</p>
+                <p className="text-sm text-gray-500">{track.desc.slice(0, 25) + "..."}</p>
             </div>
         </div>
 
@@ -22,17 +22,21 @@ export default function Player() {
             <div className="flex gap-5">
                 <img src={assets.shuffle_icon} alt="Icon" className="w-4 cursor-pointer" />
                 <img src={assets.prev_icon} alt="Icon" className="w-4 cursor-pointer" />
-                <img src={assets.play_icon} alt="Icon" className="w-4 cursor-pointer" />
+                {!playStatus ? (
+                    <img onClick={play} src={assets.play_icon} alt="Icon" className={`w-4 cursor-pointer`} />
+                ) : (
+                    <img onClick={pause} src={assets.pause_icon} alt="Icon" className={`w-4 cursor-pointer`} />
+                )}
                 <img src={assets.next_icon} alt="Icon" className="w-4 cursor-pointer" />
                 <img src={assets.shuffle_icon} alt="Icon" className="w-4 cursor-pointer" />
             </div>
 
             <div className="flex items-center gap-5">
-                <p className="text-sm font-light">0:00</p>
+                <p className="text-sm font-light">{time.current.minutes.toString().padStart(2, '0')}:{time.current.seconds.toString().padStart(2, '0')}</p>
                 <div ref={audioBg} className="w-[55vw] max-w-[400px] rounded-full bg-gray-300 cursor-pointer">
                     <hr ref={audioBar} className="h-1 bg-gradient-to-r from-green-700 to-green-400 w-10 rounded-full border-none" />
                 </div>
-                <p className="text-sm font-light">3:00</p>
+                <p className="text-sm font-light">{time.total.minutes.toString().padStart(2, '0')}:{time.total.seconds.toString().padStart(2, '0')}</p>
             </div>
         </div>
 
