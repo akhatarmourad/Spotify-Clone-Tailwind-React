@@ -24,7 +24,7 @@ export default function Albums() {
                 {
                     songsData.map((song) => {
                         return (
-                            <SongItem key={song.id} image={song.image} name={song.name} desc={song.desc} />
+                            <SongItem key={song.id} image={song.image} name={song.name} desc={song.desc} id={song.id} />
                         );
                     })
                 }

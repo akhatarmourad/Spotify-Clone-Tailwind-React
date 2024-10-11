@@ -1,11 +1,14 @@
+import { useContext } from "react";
 import { albumsData, songsData } from "../assets/assets";
 import NavBar from "./NavBar";
 import { useParams } from "react-router-dom";
+import { PlayerContext } from "../context/PlayerContext";
 
 export default function DisplayItem() {
 
     const { id } = useParams();
     const albumData = albumsData[id];
+    const { playWithId } = useContext(PlayerContext);
 
   return (
     <div>
@@ -44,7 +47,7 @@ export default function DisplayItem() {
             <div>
                 {
                     songsData.map((song, index) => (
-                        <div key={index} className="flex items-center justify-between transition-all duration-300 hover:bg-gray-950 p-3 rounded-lg cursor-pointer">
+                        <div onClick={() => playWithId(song.id)} key={index} className="flex items-center justify-between transition-all duration-300 hover:bg-gray-950 p-3 rounded-lg cursor-pointer">
                             <div className="flex gap-2 items-center">
                                 <p>{index + 1}</p>
                                 <img src={song.image} alt={song.image} className="w-10 rounded-lg" />

@@ -29,6 +29,7 @@ const PlayerContextProvider = ({ children }) => {
     useEffect(() => {
         setTimeout(() => {
             audioRef.current.ontimeupdate = () => {
+                audioBar.current.style.width = Math.floor((audioRef.current.currentTime / audioRef.current.duration) * 100).toString() + "%";
                 setTime({
                     current: {
                         minutes: Math.floor(audioRef.current.currentTime / 60),
@@ -44,7 +45,13 @@ const PlayerContextProvider = ({ children }) => {
 
     }, [audioRef]);
 
-    const contextValue = { audioRef, audioBar, audioBg, track, setTrack, playStatus, setPlayStatus, time, setTime, play, pause };
+    const playWithId = async (id) => {
+        await setTrack(songsData[id]);
+        audioRef.current.play();
+        setPlayStatus(true);
+    }
+
+    const contextValue = { audioRef, audioBar, audioBg, track, setTrack, playStatus, setPlayStatus, time, setTime, play, pause, playWithId };
 
     return (
         <PlayerContext.Provider value={contextValue}>
