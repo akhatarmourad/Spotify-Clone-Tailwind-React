@@ -31,7 +31,7 @@ This Spotify clone aims to replicate some of the core functionalities of the Spo
 
 ## Usage
 
-First, clone the project using the repositroy URL, then move to the client folder the use the [npm](https://www.npmjs.com/) to install necessary packages & dependencies.
+First, clone the project using the repositroy URL, then move to the Project folder then use the [npm](https://www.npmjs.com/) to install necessary packages & dependencies.
 
 ```bash
 npm install
