@@ -51,7 +51,28 @@ const PlayerContextProvider = ({ children }) => {
         setPlayStatus(true);
     }
 
-    const contextValue = { audioRef, audioBar, audioBg, track, setTrack, playStatus, setPlayStatus, time, setTime, play, pause, playWithId };
+    const previous = async () => {
+        if(track.id > 0) {
+            await setTrack(songsData[track.id - 1]);
+            await audioRef.current.play();
+            await setPlayStatus(true);
+        }
+    }
+
+    const next = async () => {
+        if(track.id < songsData.length - 1) {
+            await setTrack(songsData[track.id + 1]);
+            await audioRef.current.play();
+            await setPlayStatus(true);
+        }
+    }
+
+    const playSongAt = async (event) => {
+        audioRef.current.currentTime = ((event.nativeEvent.offsetX / audioBg.current.offsetWidth) * audioRef.current.duration);
+    }
+
+    const contextValue = { audioRef, audioBar, audioBg, track, setTrack, playStatus, setPlayStatus, time, setTime,
+                           play, pause, playWithId, previous, next, playSongAt };
 
     return (
         <PlayerContext.Provider value={contextValue}>

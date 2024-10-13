@@ -1,6 +1,7 @@
 import { assets } from "../assets/assets";
 import { RiHome6Line } from "react-icons/ri";
 import { IoMdSearch } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 export default function SideBar() {
   return (
@@ -11,7 +12,7 @@ export default function SideBar() {
             </div>
             <div className="flex items-center gap-3 cursor-pointer text-gray-400 hover:bg-gray-950 p-1 rounded-lg transition-all duration-300">
                 <RiHome6Line className="text-4xl" />
-                <p>Home</p>
+                <Link to='/'>Home</Link>
             </div>
             <div className="flex items-center gap-3 cursor-pointer text-gray-400 hover:bg-gray-950 p-1 rounded-lg transition-all duration-300">
                 <IoMdSearch className="text-4xl" />
